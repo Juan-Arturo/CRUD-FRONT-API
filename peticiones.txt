@@ -1,0 +1,134 @@
+    //Consultar lista de estudiantes
+GET http://127.0.0.1:8000/api/students   response  lista de estudiantes
+
+    //Consultar estudiante por id
+GET http://127.0.0.1:8000/api/students/1   response  estudiante 1
+
+    //Crear estudiante
+POST http://127.0.0.1:8000/api/students   body 
+{
+    "nombre": "Pepe",
+    "apellido_paterno": "Pérez",
+    "apellido_materno": "García",
+    "especialidad": "Informática",
+    "seguro_medico": "IMSS",
+    "curp": "PEPG010101HDFRRR00",
+    "fecha_nacimiento": "2001-01-01"
+} response  estudiante creado
+
+    //Actualizar estudiante
+PUT http://127.0.0.1:8000/api/students/1   body 
+{
+    "nombre": "Pepe",
+    "apellido_paterno": "Pérez",
+    "apellido_materno": "García",
+    "especialidad": "Informática",
+    "seguro_medico": "IMSS",
+    "curp": "PEPG010101HDFRRR00",
+    "fecha_nacimiento": "2001-01-01"
+}  response  estudiante actualizado
+
+    //Eliminar estudiante
+DELETE http://localhost:8000/api/students/1   response  usuario eliminado
+
+
+
+
+
+    //Registros de estudiantes
+//1º registro
+{
+    "nombre": "María",
+    "apellido_paterno": "López",
+    "apellido_materno": "Hernández",
+    "especialidad": "Arquitectura",
+    "seguro_medico": "ISSSTE",
+    "curp": "LOHM950404MDFRZS03",
+    "fecha_nacimiento": "1995-04-04"
+}
+
+//2º registro
+{
+    "nombre": "Carlos",
+    "apellido_paterno": "Martínez",
+    "apellido_materno": "Ruiz",
+    "especialidad": "Contaduría",
+    "seguro_medico": "Particular",
+    "curp": "MARC990305HDFLRZ07",
+    "fecha_nacimiento": "1999-03-05"
+}
+
+
+//3º registro
+{
+    "nombre": "Ana",
+    "apellido_paterno": "González",
+    "apellido_materno": "Mendoza",
+    "especialidad": "Derecho",
+    "seguro_medico": "IMSS",
+    "curp": "GOMA880710MDFNNN09",
+    "fecha_nacimiento": "1988-07-10"
+}
+
+//4º registro
+{
+    "nombre": "Roberto",
+    "apellido_paterno": "Ramírez",
+    "apellido_materno": "Sánchez",
+    "especialidad": "Medicina",
+    "seguro_medico": "Seguro Popular",
+    "curp": "RASL970811HDFSRN05",
+    "fecha_nacimiento": "1997-08-11"
+}
+
+//5º registro
+{
+    "nombre": "Diana",
+    "apellido_paterno": "Fernández",
+    "apellido_materno": "Ortiz",
+    "especialidad": "Ingeniería Civil",
+    "seguro_medico": "ISSSTE",
+    "curp": "FEOD930928MDFRRD06",
+    "fecha_nacimiento": "1993-09-28"
+}
+
+
+Principales códigos usados en APIs
+200 OK: Respuesta genérica de éxito.
+201 Created: Recurso creado.
+204 No Content: Eliminación exitosa sin respuesta adicional.
+400 Bad Request: Error en la solicitud del cliente.
+401 Unauthorized: Falta autenticación.
+403 Forbidden: Prohibido el acceso.
+404 Not Found: Recurso no encontrado.
+422 Unprocessable Entity: Datos enviados no válidos.
+500 Internal Server Error: Error en el servidor.
+
+
+1. Informativos (1xx) "Indican que la solicitud fue recibida y está siendo procesada."
+    100 Continue: El cliente puede continuar con su solicitud.
+    101 Switching Protocols: El servidor acepta cambiar de protocolo, como de HTTP a WebSocket.
+
+2. Éxito (2xx) "Indican que la solicitud fue recibida, entendida y procesada correctamente."
+    200 OK: La solicitud se procesó correctamente.
+    201 Created: Un recurso fue creado exitosamente (por ejemplo, al crear un usuario).
+    204 No Content: La solicitud se completó, pero no hay contenido que devolver (común para operaciones de eliminación).
+
+3. Redirección (3xx) "Indican que se requiere más acción para completar la solicitud."
+    301 Moved Permanently: El recurso fue movido permanentemente a otra URL.
+    302 Found: El recurso se encuentra temporalmente en otra URL.
+    304 Not Modified: No hay cambios en el recurso desde la última vez que se solicitó (usado para caché).
+
+4. Errores del cliente (4xx) "Indican que el cliente envió una solicitud incorrecta."
+    400 Bad Request: La solicitud está mal formada o tiene parámetros inválidos.
+    401 Unauthorized: El cliente no está autenticado o no tiene credenciales válidas.
+    403 Forbidden: El cliente está autenticado pero no tiene permisos para acceder al recurso.
+    404 Not Found: El recurso solicitado no existe.
+    405 Method Not Allowed: El método HTTP usado no está permitido para ese recurso (por ejemplo, usar POST en lugar de GET).
+    422 Unprocessable Entity: El servidor entiende la solicitud, pero los datos enviados no son válidos (usado en APIs REST).
+
+5. Errores del servidor (5xx) "Indican que hubo un problema interno en el servidor."
+    500 Internal Server Error: Un error genérico cuando algo falla en el servidor.
+    502 Bad Gateway: El servidor recibió una respuesta inválida al actuar como pasarela o proxy.
+    503 Service Unavailable: El servidor está temporalmente fuera de servicio (por ejemplo, por mantenimiento).
+    504 Gateway Timeout: El servidor no recibió una respuesta a tiempo de otro servidor al actuar como proxy.
