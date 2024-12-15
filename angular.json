@@ -25,6 +25,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/styles/tailwind.css",
               "src/styles.css"
             ],
             "scripts": [],
@@ -89,6 +90,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/styles/tailwind.css",
               "src/styles.css"
             ],
             "scripts": []

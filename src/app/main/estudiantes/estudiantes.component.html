@@ -1,74 +1,150 @@
-<div>
-    <h2>Gestión de Estudiantes</h2>
-  
-    <!-- Formulario para agregar o editar estudiantes -->
-    <form (submit)="onSubmit()">
-        <input type="hidden" placeholder="Matrícula"
-        [(ngModel)]="currentStudent.matricula"
-        name="matricula"
-        readonly
-        required
-      />      
-      <input
-        type="text"
-        placeholder="Nombre"
-        [(ngModel)]="currentStudent.nombre"
-        name="nombre"
-        required
-      />
-      <input
-        type="text"
-        placeholder="Apellido Paterno"
-        [(ngModel)]="currentStudent.apellido_paterno"
-        name="apellido_paterno"
-        required
-      />
-      <input
-        type="text"
-        placeholder="Apellido Materno"
-        [(ngModel)]="currentStudent.apellido_materno"
-        name="apellido_materno"
-        required
-      />
-      <input
-        type="text"
-        placeholder="Especialidad"
-        [(ngModel)]="currentStudent.especialidad"
-        name="especialidad"
-        required
-      />
-      <input
-        type="text"
-        placeholder="Seguro Médico"
-        [(ngModel)]="currentStudent.seguro_medico"
-        name="seguro_medico"
-        required
-      />
-      <input
-        type="text"
-        placeholder="CURP"
-        [(ngModel)]="currentStudent.curp"
-        name="curp"
-        required
-      />
-      <input
-        type="date"
-        [(ngModel)]="currentStudent.fecha_nacimiento"
-        name="fecha_nacimiento"
-        required
-      />
-      <button type="submit">{{ editing ? 'Actualizar' : 'Agregar' }}</button>
-    </form>
-  
-    <!-- Lista de estudiantes -->
-    <ul>
-      <li *ngFor="let student of students">
-        {{ student.matricula }} - {{ student.nombre }} {{ student.apellido_paterno }} {{ student.apellido_materno }} - 
-        {{ student.especialidad }} - {{ student.seguro_medico }} - {{ student.curp }} - 
-        {{ student.fecha_nacimiento }}
-        <button (click)="editStudent(student)">Editar</button>
-        <button (click)="deleteStudent(student.matricula)">Eliminar</button>
-      </li>
-    </ul>
+<div class="p-6 bg-gradient-to-br from-gray-100 to-gray-200 min-h-screen">
+  <h2 class="text-3xl font-bold text-gray-700 mb-8 text-center">Gestión de Estudiantes</h2>
+
+  <!-- Formulario para agregar o editar estudiantes -->
+  <form 
+    class="bg-white p-8 rounded-xl shadow-lg max-w-4xl mx-auto space-y-6 border-t-4 border-blue-600"
+    (submit)="onSubmit()">
+    <h3 class="text-xl font-semibold text-gray-600 text-center">
+      {{ editing ? 'Actualizar Estudiante' : 'Agregar Estudiante' }}
+    </h3>
+
+    <!-- Nombre y apellidos -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div>
+        <label class="block text-sm font-medium text-gray-600 mb-1">Nombre</label>
+        <input 
+          type="text"
+          placeholder="Nombre"
+          [(ngModel)]="currentStudent.nombre"
+          name="nombre"
+          required
+          class="border border-gray-300 rounded-lg px-4 py-2 w-full focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-600 mb-1">Apellido Paterno</label>
+        <input 
+          type="text"
+          placeholder="Apellido Paterno"
+          [(ngModel)]="currentStudent.apellido_paterno"
+          name="apellido_paterno"
+          required
+          class="border border-gray-300 rounded-lg px-4 py-2 w-full focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-600 mb-1">Apellido Materno</label>
+        <input 
+          type="text"
+          placeholder="Apellido Materno"
+          [(ngModel)]="currentStudent.apellido_materno"
+          name="apellido_materno"
+          required
+          class="border border-gray-300 rounded-lg px-4 py-2 w-full focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+    </div>
+
+    <!-- Especialidad, Seguro y CURP -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div>
+        <label class="block text-sm font-medium text-gray-600 mb-1">Especialidad</label>
+        <input 
+          type="text"
+          placeholder="Especialidad"
+          [(ngModel)]="currentStudent.especialidad"
+          name="especialidad"
+          required
+          class="border border-gray-300 rounded-lg px-4 py-2 w-full focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-600 mb-1">Seguro Médico</label>
+        <input 
+          type="text"
+          placeholder="Seguro Médico"
+          [(ngModel)]="currentStudent.seguro_medico"
+          name="seguro_medico"
+          required
+          class="border border-gray-300 rounded-lg px-4 py-2 w-full focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-600 mb-1">CURP</label>
+        <input 
+          type="text"
+          placeholder="CURP"
+          [(ngModel)]="currentStudent.curp"
+          name="curp"
+          required
+          class="border border-gray-300 rounded-lg px-4 py-2 w-full focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+    </div>
+
+    <!-- Fecha de nacimiento -->
+    <div class="grid grid-cols-1">
+      <div>
+        <label class="block text-sm font-medium text-gray-600 mb-1">Fecha de Nacimiento</label>
+        <input 
+          type="date"
+          id="fecha_nacimiento"
+          [(ngModel)]="currentStudent.fecha_nacimiento"
+          name="fecha_nacimiento"
+          required
+          class="border border-gray-300 rounded-lg px-4 py-2 w-full focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+    </div>
+
+    <!-- Botón de acción -->
+    <div class="text-center">
+      <button 
+        type="submit"
+        class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition shadow-md">
+        {{ editing ? 'Actualizar' : 'Agregar' }}
+      </button>
+    </div>
+  </form>
+
+  <!-- Lista de estudiantes -->
+  <div class="bg-white p-8 rounded-xl shadow-lg max-w-6xl mx-auto mt-10 border-t-4 border-green-600">
+    <h3 class="text-2xl font-semibold text-gray-600 mb-6 text-center">Lista de Estudiantes</h3>
+    <table class="table-auto w-full border-collapse text-left  text-sm">
+      <thead>
+        <tr class="bg-gray-200 text-gray-700">
+          <th class="border border-gray-300 px-4 py-2">Matrícula</th>
+          <th class="border border-gray-300 px-4 py-2">Nombre</th>
+          <th class="border border-gray-300 px-4 py-2">Especialidad</th>
+          <th class="border border-gray-300 px-4 py-2">Seguro Médico</th>
+          <th class="border border-gray-300 px-4 py-2">CURP</th>
+          <th class="border border-gray-300 px-4 py-2">Fecha Nacimiento</th>
+          <th class="border border-gray-300 px-4 py-2">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of students" class="hover:bg-gray-100">
+          <td class="border border-gray-300 px-4 py-2">{{ student.matricula }}</td>
+          <td class="border border-gray-300 px-4 py-2">
+            {{ student.nombre }} {{ student.apellido_paterno }} {{ student.apellido_materno }}
+          </td>
+          <td class="border border-gray-300 px-4 py-2">{{ student.especialidad }}</td>
+          <td class="border border-gray-300 px-4 py-2">{{ student.seguro_medico }}</td>
+          <td class="border border-gray-300 px-4 py-2">{{ student.curp }}</td>
+          <td class="border border-gray-300 px-4 py-2">{{ student.fecha_nacimiento }}</td>
+          <td class="border border-gray-300 px-4 py-2 text-center">
+            <button (click)="editStudent(student)"
+              class="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 transition">
+              Editar
+            </button>
+            <button  (click)="deleteStudent(student.matricula)"
+              class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition ml-2">
+              Eliminar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  
+</div>
