@@ -19,6 +19,7 @@ export class StudentService {
   getAllStudents(): Observable<Student[]> {
     return this.http.get<Student[]>(`${this.apiUrl}/students`);
   }
+  
 
   // Obtener un alumno por matrícula
   getStudentByMatricula(matricula: number): Observable<Student> {
