@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Student } from '../interfaces/student.model';
+import { Student,SingleStudentResponse } from '../interfaces/student.model';
 
 
 @Injectable({
@@ -22,8 +22,8 @@ export class StudentService {
   
 
   // Obtener un alumno por matrícula
-  getStudentByMatricula(matricula: number): Observable<Student> {
-    return this.http.get<Student>(`${this.apiUrl}/students/${matricula}`);
+  getStudentByMatricula(matricula: number) {
+    return this.http.get<SingleStudentResponse>(`${this.apiUrl}/students/${matricula}`)
   }
 
   // Crear un alumno

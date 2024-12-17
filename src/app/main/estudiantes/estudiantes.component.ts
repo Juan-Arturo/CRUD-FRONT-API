@@ -7,12 +7,14 @@ import { Student } from '../../interfaces/student.model';
 @Component({
   selector: 'app-estudiantes',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './estudiantes.component.html',
   styleUrl: './estudiantes.component.css'
 })
 export class EstudiantesComponent {
   students: Student[] = []; // Usamos la interfaz Student para tipar la lista
+  searchMatricula: string = "";
+
   currentStudent: Student = {  // Usamos la interfaz Student para tipar el objeto
     matricula: 0,
     nombre: '',
@@ -25,13 +27,16 @@ export class EstudiantesComponent {
     created_at: '',
     updated_at: ''
   };
-  editing: boolean = false;
+  editing: boolean = false;   // Indica si se está editando o agregando un estudiante
+  showModal: boolean = false; // Control de visibilidad del modal
 
-  constructor(private studentService: StudentService) {}
+
+  constructor(private studentService: StudentService) { }
 
   ngOnInit(): void {
     this.getAllStudents();
   }
+
 
   // Obtener todos los estudiantes
   getAllStudents(): void {
@@ -41,12 +46,30 @@ export class EstudiantesComponent {
     });
   }
 
+  //busca por matricula
+  searchStudent(): void {
+    let numberMatricula: number;
+    numberMatricula = parseInt(this.searchMatricula);
+    if (numberMatricula >= 0) {
+      this.studentService.getStudentByMatricula(numberMatricula).subscribe({
+        next: (response) => (
+          console.log(response),
+          this.students = [response.student]),
+        error: (err) => console.error('Error al buscar estudiante:', err)
+      });
+    } else {
+      this.getAllStudents();
+    }
+  }
+
+
   // Agregar o actualizar estudiante
   onSubmit(): void {
     if (this.editing) {
       this.studentService.updateStudent(this.currentStudent.matricula, this.currentStudent).subscribe({
         next: () => {
           this.getAllStudents();
+          this.closeModal();
           this.resetForm();
         },
         error: (err) => console.error('Error al actualizar estudiante:', err)
@@ -55,7 +78,9 @@ export class EstudiantesComponent {
       this.studentService.createStudent(this.currentStudent).subscribe({
         next: () => {
           this.getAllStudents();
+          this.closeModal();
           this.resetForm();
+
         },
         error: (err) => console.error('Error al agregar estudiante:', err)
       });
@@ -63,7 +88,7 @@ export class EstudiantesComponent {
   }
 
   // Editar estudiante
-  editStudent(student: Student): void {  
+  editStudent(student: Student): void {
     this.currentStudent = { ...student };
     this.editing = true;
   }
@@ -94,4 +119,25 @@ export class EstudiantesComponent {
     };
     this.editing = false;
   }
+
+
+  // Mostrar el modal
+  openModal(editing: boolean = false, student?: Student): void {
+    this.editing = editing;
+    if (editing && student) {
+      this.currentStudent = { ...student };
+    } else {
+      this.resetForm();
+    }
+    this.showModal = true;
+  }
+
+  // Ocultar el modal
+  closeModal(): void {
+    this.showModal = false;
+    this.resetForm();
+  }
+
+
+
 }
