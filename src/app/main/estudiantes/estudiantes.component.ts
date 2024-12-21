@@ -77,6 +77,7 @@ export class EstudiantesComponent {
     } else {
       this.studentService.createStudent(this.currentStudent).subscribe({
         next: () => {
+          console.log(this.currentStudent)
           this.getAllStudents();
           this.closeModal();
           this.resetForm();
