@@ -15,6 +15,7 @@ export class RickMortyService {
 
   constructor(private http: HttpClient) { }
 
+  // Obtener todos los personajes
   getRickAndmortyCharacter(): Observable<Result[]> {
     return this.http.get<rickandmortyData>(`${this.endPoint}/character`).pipe(
       map((response: rickandmortyData) => response.results)
@@ -23,6 +24,7 @@ export class RickMortyService {
   }//end get   
 
 
+   //Obtner todos las variantes murtiversales de un personaje en especifico
   getRickAndmortyCharacterByID(name: string): Observable<Result[]> {
     return this.http.get<rickandmortyData>(`${this.endPoint}/character/?name=${name}`).pipe(
       map((response: rickandmortyData) => {

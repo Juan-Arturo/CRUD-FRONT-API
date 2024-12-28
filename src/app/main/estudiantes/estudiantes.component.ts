@@ -12,7 +12,7 @@ import { Student } from '../../interfaces/student.model';
   styleUrl: './estudiantes.component.css'
 })
 export class EstudiantesComponent {
-  students: Student[] = []; // Usamos la interfaz Student para tipar la lista
+  students: Student[] = []; // Usamos la interfaz Student para tipar la lista de estudiantes
   searchMatricula: string = "";
 
   currentStudent: Student = {  // Usamos la interfaz Student para tipar el objeto
@@ -49,11 +49,11 @@ export class EstudiantesComponent {
   //busca por matricula
   searchStudent(): void {
     let numberMatricula: number;
-    numberMatricula = parseInt(this.searchMatricula);
+    numberMatricula = parseInt(this.searchMatricula); //convertimos el string a number
     if (numberMatricula >= 0) {
       this.studentService.getStudentByMatricula(numberMatricula).subscribe({
         next: (response) => (
-          console.log(response),
+         // console.log(response),
           this.students = [response.student]),
         error: (err) => console.error('Error al buscar estudiante:', err)
       });
@@ -104,7 +104,7 @@ export class EstudiantesComponent {
     }
   }
 
-  // Resetear formulario
+  // Resetear formulario para vaciar los campos
   resetForm(): void {
     this.currentStudent = {
       matricula: 0,

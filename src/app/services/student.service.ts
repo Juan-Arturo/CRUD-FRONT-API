@@ -28,7 +28,6 @@ export class StudentService {
 
   // Crear un alumno
   createStudent(student: Student): Observable<Student> {
-     
       return this.http.post<Student>(`${this.apiUrl}/students`, student);
   }
 
